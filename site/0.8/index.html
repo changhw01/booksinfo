@@ -16,13 +16,14 @@
   <p><strong>Page:</strong> {{ctrl.tableParams.page()}}
   <p><strong>Count per page:</strong> {{ctrl.tableParams.count()}}
   <p><strong>Total Number of Books:</strong> {{ctrl.tableParams.total()}}
-  
+  <br><br>
+  <button ng-click="ctrl.tableParams.sorting({})" class="btn btn-default pull-left">Clear sorting</button>
   <table ng-table="ctrl.tableParams" template-pagination="custom/pager" class="table ng-table-responsive">
     <tr ng-repeat="book in $data">
-        <td data-title="'Title'">{{$index + 1}}. {{book.bookTitle}}</td>
-        <td data-title="'Author'">{{book.author}}</td>
-        <td data-title="'Publisher'">{{book.publisher}}</td>
-        <td data-title="'Publish Date'">{{book.datePublished}}</td>
+        <td data-title="'Title'" sortable="'bookTitle'">{{$index + 1}}. {{book.bookTitle}}</td>
+        <td data-title="'Author'" sortable="'author'">{{book.author}}</td>
+        <td data-title="'Publisher'" sortable="'publisher'">{{book.publisher}}</td>
+        <td data-title="'Publish Date'" sortable="'datePublished'">{{book.datePublished}}</td>
     </tr>
   </table>
   
