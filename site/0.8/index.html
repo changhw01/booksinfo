@@ -16,7 +16,8 @@
   <p><strong>Page:</strong> {{ctrl.tableParams.page()}}
   <p><strong>Count per page:</strong> {{ctrl.tableParams.count()}}
   <p><strong>Total Number of Books:</strong> {{ctrl.tableParams.total()}}
-  <table ng-table="ctrl.tableParams" class="table ng-table-responsive">
+  
+  <table ng-table="ctrl.tableParams" template-pagination="custom/pager" class="table ng-table-responsive">
     <tr ng-repeat="book in $data">
         <td data-title="'Title'">{{$index + 1}}. {{book.bookTitle}}</td>
         <td data-title="'Author'">{{book.author}}</td>
@@ -24,6 +25,27 @@
         <td data-title="'Publish Date'">{{book.datePublished}}</td>
     </tr>
   </table>
+  
+  <script type="text/ng-template" id="custom/pager">
+      <ul class="pager ng-cloak">
+        <li ng-repeat="page in pages"
+              ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+              ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+          <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+          <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+        </li>
+          <li> 
+          <div class="btn-group">
+              <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+              <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+              <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+              <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+          </div>
+          </li>
+      </ul>
+  </script>  
+  
+  
   <script src="js/books.js"></script>
 </body>
 </html>

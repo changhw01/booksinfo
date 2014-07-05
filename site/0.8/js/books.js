@@ -1,10 +1,9 @@
-var app = angular.module('BookInfo', ["firebase", "ngTable"]);
-app.controller('MyController', ['$firebase', 'ngTableParams', function($firebase, ngTableParams) {
+var app = angular.module('BookInfo', ["firebase", "ngTable"]).
+controller('MyController', ['$firebase', 'ngTableParams', function($firebase, ngTableParams) {
     var self = this;
     var refBook = new Firebase("https://booksinfo.firebaseio.com/BooksBrief");
     self.books = $firebase(refBook).asArray();
     self.books.loaded().then(function(){
-      console.log('num books = ' + self.books.length);
       self.tableParams = new ngTableParams({
         page: 1,
         count: 10
