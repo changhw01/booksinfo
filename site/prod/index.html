@@ -1,0 +1,31 @@
+<html ng-app="BookInfo">
+<head>
+  <title>List of New Books</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/ng-table.css" />
+  
+  <!-- AngularJS -->
+  <script src="js/angular.js"></script>
+  <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+  <script src="js/angularfire.js"></script>
+  <!-- ng-table -->
+  <script src="js/ng-table.js"></script>
+</head>
+
+<body ng-controller="MyController as ctrl">
+  <p><strong>Page:</strong> {{ctrl.tableParams.page()}}
+  <p><strong>Count per page:</strong> {{ctrl.tableParams.count()}}
+  <p><strong>Total Number of Books:</strong> {{ctrl.tableParams.total()}}
+    
+  <table ng-table="ctrl.tableParams" class="table ng-table-responsive">
+    <tr ng-repeat="book in $data">
+        <td data-title="'Title'">{{$index + 1}}. {{book.bookTitle}}</td>
+        <td data-title="'Author'">{{book.author}}</td>
+        <td data-title="'Publisher'">{{book.publisher}}</td>
+        <td data-title="'Publish Date'">{{book.datePublished}}</td>
+    </tr>
+  </table>
+  <script src="js/books.js"></script>
+</body>
+</html>
